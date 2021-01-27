@@ -1,7 +1,9 @@
 <template>
   <div class="container">
+    <div class="row" v-for="(item, index) in apiData" :key="index">{{item.Add}}</div>
+
     <div class="row">
-      <div class="col-md-4 mb-4" v-for="(item, index) in apiData.data" :key="index">
+      <div class="col-md-4" v-for="(item, index) in apiData.data" :key="index">
         <div class="card">
           <div class="card-head">
             <div class="zoneTeg">{{item.Zone}}</div>
@@ -31,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { onMounted, reactive } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import axios from 'axios'
 
 export default ({
@@ -43,6 +45,11 @@ export default ({
     })
 
     // computed
+    const newAdd = computed(() => {
+      return apiData.data.forEach((travelData: TravelData) => {
+        travelData.Add = travelData.Add.substring(6)
+      })
+    })
 
     // methods
     function getData () {
@@ -50,11 +57,7 @@ export default ({
       axios.get(api)
         .then((res) => {
           apiData.data = res.data.result.records
-          apiData.data.forEach((travelData: TravelData) => {
-            if (travelData.Add) {
-              travelData.Add = travelData.Add.substring(6)
-            }
-          })
+          console.log('apiData.data', apiData.data)
         })
         .catch((err) => {
           console.log('err', err)
@@ -66,9 +69,9 @@ export default ({
       getData()
     })
 
-    // return
     return {
-      apiData
+      apiData,
+      newAdd
     }
   }
 })
@@ -102,46 +105,46 @@ export interface TravelData {
 
 <style scoped lang="scss">
 @import "~bootstrap/scss/bootstrap";
-.card-head {
-  position: relative;
-  .zoneTeg {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    padding: 5px 15px;
-    border-radius: 5px;
-    background-color: $info;
-    color: white;
+  .card-head {
+    position: relative;
+    .zoneTeg {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      padding: 5px 15px;
+      border-radius: 5px;
+      background-color: $info;
+      color: white;
+      font-weight: bold;
+    }
+  }
+
+  .card-title {
+    font-size: 20px;
     font-weight: bold;
   }
-}
 
-.card-title {
-  font-size: 20px;
-  font-weight: bold;
-}
+  .picture {
+    width: 100%;
+    height: 0;
+    padding-top: calc(100% * 4 / 6);
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 
-.picture {
-  width: 100%;
-  height: 0;
-  padding-top: calc(100% * 4 / 6);
-  display: block;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+  .card-info {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
 
-.card-info {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-.card-info-icon {
-  margin-right: 8px;
-  width: 16px;
-  height: 16px;
-  color: $info;
-  text-align: center;
-}
+  .card-info-icon {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    color: $info;
+    text-align: center;
+  }
 </style>

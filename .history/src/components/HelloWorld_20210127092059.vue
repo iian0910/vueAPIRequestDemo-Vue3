@@ -102,46 +102,46 @@ export interface TravelData {
 
 <style scoped lang="scss">
 @import "~bootstrap/scss/bootstrap";
-.card-head {
-  position: relative;
-  .zoneTeg {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    padding: 5px 15px;
-    border-radius: 5px;
-    background-color: $info;
-    color: white;
+  .card-head {
+    position: relative;
+    .zoneTeg {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      padding: 5px 15px;
+      border-radius: 5px;
+      background-color: $info;
+      color: white;
+      font-weight: bold;
+    }
+  }
+
+  .card-title {
+    font-size: 20px;
     font-weight: bold;
   }
-}
 
-.card-title {
-  font-size: 20px;
-  font-weight: bold;
-}
+  .picture {
+    width: 100%;
+    height: 0;
+    padding-top: calc(100% * 4 / 6);
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 
-.picture {
-  width: 100%;
-  height: 0;
-  padding-top: calc(100% * 4 / 6);
-  display: block;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+  .card-info {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
 
-.card-info {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-.card-info-icon {
-  margin-right: 8px;
-  width: 16px;
-  height: 16px;
-  color: $info;
-  text-align: center;
-}
+  .card-info-icon {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    color: $info;
+    text-align: center;
+  }
 </style>
